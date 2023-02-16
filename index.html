@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Calculators</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Restaurant<br>Bill Calculator</h1>
+        <form>
+            <input type="number" id="food" placeholder="Food Sub-total">
+            <input type="number" id="bev" placeholder="Beverage Sub-total">
+
+            <select id="tip-menu">
+                <option value="choose">Gratuity %</option>
+                <option value="7">7% Tip</option>
+                <option value="10">10% Tip</option>
+                <option value="12">12% Tip</option>
+                <option value="15" selected>15% Tip)</option>
+                <option value="18">18% Tip</option>
+                <option value="20">20% Tip </option>
+                <option value="25">25% Tip</option>
+            </select>
+
+            <select id="tax-menu">
+                <option value="choose">Sales Tax %</option>
+                <option value="0">0% Tax</option>
+                <option value="4">4% Tax</option>
+                <option value="6">6% Tax</option>
+                <option value="8.875" selected>8.875% Tax</option>
+                <option value="10">10% Tax</option>
+            </select>
+        
+            <button id="calc-btn">Calculate</button>
+            <h3 id="response"></h3>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+   
+</body>
+</html>
