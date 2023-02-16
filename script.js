@@ -1,3 +1,48 @@
+// selectorAll for buttons appearing multiple times
+const numberButton = document.querySelectorAll('[data-number]');
+const operationButton = document.querySelectorAll('[data-operation]');
+
+const equalButton = document.querySelector('[data-equal]')
+const deleteButton = document.querySelector('[data-delete]')
+const allClearButton = document.querySelector('[data-clear-all]')
+const previousOperandTextElement = document.querySelector('[data-previous-operand]')
+const currentOperandTextElement = document.querySelector('[data-current-operand]')
+
+class Calculator {
+    constructor(previousOperandTextElement, currentOperandTextElement) {
+        this.previousOperandTextElement = previousOperandTextElement
+        this.currentOperandTextElement = currentOperandTextElement
+        this.clear();
+    }
+}
+
+function clearAll() {
+    this.previousOperand = "";
+    this.currentOperand = "";
+    this.operation = undefined;
+}
+
+function deleteNum() {
+
+}
+
+function appendNumber(number) {
+
+}
+
+function chooseOperation(operation) {
+
+}
+
+function compute() {
+
+}
+
+function updateDispaly() {
+
+}
+
+// --- restaurant bill calculator ---
 let food = document.getElementById('food');
 let bev = document.getElementById('bev');
 let tipMenu = document.getElementById('tip-menu');
