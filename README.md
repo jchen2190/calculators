@@ -11,4 +11,4 @@ Go to [https://jchen2190@github.io/calculators](https://jchen2190.github.io/calc
 
 ## Sources
 The calculator was based on a tutorial
-[Javascript calculator tutorial]([calculator javascript tutorial](https://www.section.io/engineering-education/building-a-calculator-a-javascript-project-for-beginners/))
+[Javascript calculator tutorial](https://www.section.io/engineering-education/building-a-calculator-a-javascript-project-for-beginners/)
