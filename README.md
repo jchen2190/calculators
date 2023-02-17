@@ -8,3 +8,7 @@ Project is created with Javascript
 
 ## Deployment
 Go to [https://jchen2190@github.io/calculators](https://jchen2190.github.io/calculators/)
+
+## Sources
+The calculator was based on a tutorial
+[https://www.section.io/engineering-education/building-a-calculator-a-javascript-project-for-beginners/](calculator javascript tutorial)
