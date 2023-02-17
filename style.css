@@ -7,16 +7,17 @@ body {
     padding: 0;
 }
 
-h1 {
+.title {
     display: flex;
     justify-content: center;
     font-weight: 800;
+    color: rgba(97, 32, 2, 1);
 }
 
 .calculator-grid {
     display: grid;
     justify-content: center;
-    margin: auto;
+    margin: auto auto 100px auto;
     grid-template-columns: repeat(4, 80px);
     grid-template-rows: repeat(6, 75px);
     grid-gap: 10px;

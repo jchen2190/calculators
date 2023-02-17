@@ -2,47 +2,184 @@
 const numberButton = document.querySelectorAll('[data-number]');
 const operationButton = document.querySelectorAll('[data-operation]');
 
-const equalButton = document.querySelector('[data-equal]')
-const deleteButton = document.querySelector('[data-delete]')
-const allClearButton = document.querySelector('[data-clear-all]')
-const previousOperandTextElement = document.querySelector('[data-previous-operand]')
-const currentOperandTextElement = document.querySelector('[data-current-operand]')
+const equalButton = document.querySelector('[data-equal]');
+const deleteButton = document.querySelector('[data-delete]');
+const clearAllButton = document.querySelector('[data-clear-all]');
+const previousOperandTextElement = document.querySelector('[data-previous-operand]');
+const currentOperandTextElement = document.querySelector('[data-current-operand]');
+
 
 class Calculator {
     constructor(previousOperandTextElement, currentOperandTextElement) {
-        this.previousOperandTextElement = previousOperandTextElement
-        this.currentOperandTextElement = currentOperandTextElement
+        this.previousOperandTextElement = previousOperandTextElement;
+        this.currentOperandTextElement = currentOperandTextElement;
         this.clear();
+    }
+
+    // clear displayed values
+    clear() {
+        this.previousOperand = "";
+        this.currentOperand = "";
+        this.operation = undefined;
+    }
+
+    // backspace 'DEL'
+    deleteNum() {
+        this.currentOperand = this.currentOperand.toString().slice(0, -1); // 0 from start, 1 from end
+    }
+
+    // click on numbers or . 
+    appendNumber(number) {
+        // clicking multiple period is still 1 period
+        if (number === '.' && this.currentOperand.includes('.')) return; 
+        this.currentOperand = this.currentOperand.toString() + number.toString();
+    }
+
+    // click on ÷ / * / + / -
+    chooseOperation(operation) {
+        if (this.currentOperand === '') return;
+        if (this.previousOperand !== '') {
+        this.compute();
+        }
+        this.operation = operation;
+        this.previousOperand = this.currentOperand;
+        this.currentOperand = '';
+    }
+
+    compute() {
+        let comp;
+        const prev = parseFloat(this.previousOperand);
+        const current = parseFloat(this.currentOperand);
+
+        if (isNaN(prev) || isNaN(current)) return;
+        switch (this.operation) {
+            case '+':
+                comp = prev + current;
+                break;
+            case '-':
+                comp = prev - current;
+                break;
+            case '*':
+                comp = prev * current;
+                break;
+            case '÷':
+                comp = prev / current;
+                break;
+            default:
+                return;
+        }
+
+        this.currentOperand = comp;
+        this.operation = undefined;
+        this.previousOperand = '';
+    }
+
+    // display screen
+    updateDisplay() {
+        this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand);
+        if (this.operation != null) {
+            this.previousOperandTextElement.innerText =
+              `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+        } else {
+            this.previousOperandTextElement.innerText = '';
+        }
+    }
+
+    getDisplayNumber(num) {
+        const stringNumber = num.toString()
+        const integerDigits = parseFloat(stringNumber.split('.')[0])
+        const decimalDigits = stringNumber.split('.')[1]
+        let integerDisplay
+        if (isNaN(integerDigits)) {
+          integerDisplay = ''
+        } else {
+          integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+        }
+        if (decimalDigits != null) {
+          return `${integerDisplay}.${decimalDigits}`
+        } else {
+          return integerDisplay
+        }
+      }
+    
+    
+}
+
+const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
+
+
+// call functions when buttons are clicked, go to class + constructor
+numberButton.forEach(button => { 
+    button.addEventListener('click', () => {
+        calculator.appendNumber(button.innerText); // display values
+        calculator.updateDisplay();
+    })
+})
+
+operationButton.forEach(button => {
+    button.addEventListener('click', () => {
+      calculator.chooseOperation(button.innerText);
+      calculator.updateDisplay();
+    })
+})
+
+equalButton.addEventListener('click', button => {
+    calculator.compute();
+    calculator.updateDisplay();
+})
+
+clearAllButton.addEventListener('click', button => {
+    calculator.clear();
+    calculator.updateDisplay();
+})
+
+deleteButton.addEventListener('click', button => {
+    calculator.deleteNum();
+    calculator.updateDisplay();
+})
+
+document.addEventListener('keydown', respondToKeyPress)
+
+function respondToKeyPress(event) {
+    let numKey = /[0-9]/g // use regex global
+    let operKey = /[+\-%]/g // use regex global
+
+    if (event.key.match(numKey)) {
+        event.preventDefault(); // prevent refresh
+        calculator.appendNumber(event.key)
+        calculator.updateDisplay()
+    }
+
+    if (event.key === '.') {
+        event.preventDefault();
+        calculator.appendNumber(event.key)
+        calculator.updateDisplay()
+    }
+
+    if (event.key.match(operKey)) {
+        event.preventDefault();
+        calculator.chooseOperation(event.key);
+        calculator.updateDisplay();
+    }
+
+    if (event.key === '=' || event.key === 'Enter') {
+        event.preventDefault();
+        calculator.compute();
+        calculator.updateDisplay();
+    }
+
+    if (event.key === "Backspace" || event.key === "Delete") {
+        event.preventDefault();
+        calculator.deleteNum();
+        calculator.updateDisplay();
     }
 }
 
-function clearAll() {
-    this.previousOperand = "";
-    this.currentOperand = "";
-    this.operation = undefined;
-}
 
-function deleteNum() {
 
-}
-
-function appendNumber(number) {
-
-}
-
-function chooseOperation(operation) {
-
-}
-
-function compute() {
-
-}
-
-function updateDispaly() {
-
-}
 
 // --- restaurant bill calculator ---
+
 let food = document.getElementById('food');
 let bev = document.getElementById('bev');
 let tipMenu = document.getElementById('tip-menu');
