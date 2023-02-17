@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <title>Calculators</title>
     <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
 </head>
 
 <body>
     <h1 class="title">Calculator</h1>
     <div class="calculator-grid">
-        <div class="output">
+        <div class="output" autofocus>
             <div data-previous-operand class="previous-operand">123 +</div>
             <div data-current-operand class="current-operand">456</div>
         </div>
@@ -35,7 +36,6 @@
         <button data-number>0</button>
         <button data-equal class="span-two">=</button>
     </div>
-
 
 
 
@@ -70,7 +70,46 @@
         </form>
     </div>
 
-    <script src="script.js"></script>
+
+    <div class="apartment-container">
+        <h1>Apartment Rent Estimator</h1>
+        <form>
+            <select name='bdrms' id='bdrms'>
+                <option value="1000">Studio ($1,000)</option>
+                <option value="1400" selected>1 Bedroom ($1,400)</option>
+                <option value="1800">2 Bedrooms ($1,800)</option>
+                <option value="2300">3 Bedrooms ($2,300)</option>
+            </select>
+            
+            <select name='baths' id='baths'>
+                <option value="0">1 Bath</option>
+                <option value="450">1 1/2 Baths (+$450)</option>
+                <option value="850">2 Baths (+$850)</option>
+                <option value="1250">2 1/2 Baths (+$1,250)</option>
+            </select>
+
+            <h4>Monthly charges apply for amenities;<br>
+            % fees are on top of bedrooms + baths:</h4>
+
+            <input type='checkbox' id='doorman' value='0.1'>
+            <label for='doorman'>Doorman Building (+10%)</label><br>
+
+            <input type="checkbox" id="view" value='.25'>
+            <label for="view">Skyline View (+25%)</label><br>
+
+            <input type='checkbox' id='parking' value='350'>
+            <label for='parking'>Indoor Parking (+$350)</label><br>
+
+            <input type='checkbox' id='gym' value='100'>
+            <label for='gym'>Fitness Center (+$100)</label><br>
+            
+            <button id="rent-btn">calculate rent</button>
+
+            <h3 id="feedback"></h3>
+        </form>
+    </div>
+
+    
    
 </body>
 </html>

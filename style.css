@@ -21,6 +21,10 @@ body {
     grid-template-columns: repeat(4, 80px);
     grid-template-rows: repeat(6, 75px);
     grid-gap: 10px;
+    max-width: 350px;
+    padding: 40px;
+    background-color: rgb(87, 87, 87);
+    border-radius: 20px;
 }
 
 .calculator-grid > button {
@@ -63,11 +67,14 @@ body {
     font-size: 2.1rem;
 }
 
+
+/* ----- restaurant bill ----- */
+
 .bill-container {
     display: block;
     justify-content: center;
     max-width: 210px;
-    margin: 30px auto; 
+    margin: auto auto 100px auto;
     background-color: rgba(77,77,77,.77); 
     min-height: 40vh; 
     text-align: center; 
@@ -88,13 +95,77 @@ body {
     width: 200px;
 }
 
-.bill-container  #output {
-    text-align: left;
-}
-
-.bill-container  #response {
+.bill-container #response {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: left;
+}
+
+
+
+/* ------ apartment ----- */
+
+.apartment-container {
+    width: 420px;
+    margin: auto auto 100px auto;
+    background-color: rgba(200,200,200,.85);
+    min-height: 550px;
+    text-align: left;
+    padding: 20px;
+    font-family: sans-serif;
+    border-radius: 10px;
+    border: 3px solid maroon;
+    box-shadow: 5px 5px 5px maroon; 
+}
+
+.apartment-container h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.apartment-container button {
+    text-transform: uppercase;
+    background-color: maroon;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.apartment-container input {
+    font-size: 1em;
+    padding: 5px 5px 5px 8px;
+    display: block;
+    width: 225px;
+    margin: 10px;
+}
+
+.apartment-container button, .apartment-container select {
+    font-size: 1em;
+    padding: 5px;
+    display: block;
+    margin: 25px 10px;
+    width: 240px;
+}
+
+.apartment-container button {
+    text-transform: uppercase;
+    background-color: maroon;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.apartment-container input[type="checkbox"], .apartment-container label {
+    display: inline;
+    width: 30px;
+    padding: 5px;
+}
+
+.apartment-container select {
+    font-size: 1.1rem;
+    width: 250px;
+    padding:5px;
 }

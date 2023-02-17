@@ -10,6 +10,7 @@ const currentOperandTextElement = document.querySelector('[data-current-operand]
 
 
 class Calculator {
+    
     constructor(previousOperandTextElement, currentOperandTextElement) {
         this.previousOperandTextElement = previousOperandTextElement;
         this.currentOperandTextElement = currentOperandTextElement;
@@ -102,7 +103,6 @@ class Calculator {
         }
       }
     
-    
 }
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
@@ -138,7 +138,8 @@ deleteButton.addEventListener('click', button => {
     calculator.updateDisplay();
 })
 
-document.addEventListener('keydown', respondToKeyPress)
+
+document.querySelector('.calculator-grid').addEventListener('keydown', respondToKeyPress)
 
 function respondToKeyPress(event) {
     let numKey = /[0-9]/g // use regex global
@@ -186,7 +187,6 @@ let tipMenu = document.getElementById('tip-menu');
 let taxMenu = document.getElementById('tax-menu');
 let calcBtn = document.getElementById('calc-btn');
 let response = document.getElementById('response');
-let ppl = document.getElementById('people');
 
 calcBtn.addEventListener('click', calcBill);
 
@@ -244,3 +244,41 @@ function calcBill(event) {
     response.innerHTML = bill;
 }
 
+
+
+// Apartment Rent Estimator
+
+const rentBtn = document.getElementById('rent-btn');
+rentBtn.addEventListener('click', calculateRent);
+
+const feedbackTag = document.getElementById('feedback');
+
+function calculateRent(event) {
+    event.preventDefault();
+
+    // get the select menus
+    let bdrms = Number(document.getElementById('bdrms').value);
+    let baths = Number(document.getElementById('baths').value);
+    let rent = bdrms + baths;
+
+    // get the checkboxes
+    let doormanCB = document.getElementById('doorman');
+    let parkingCB = document.getElementById('parking');
+    let viewCB = document.getElementById('view');
+    let gymCB = document.getElementById('gym');
+
+    // if checkbox is checked, add the value to the rent
+    if(doormanCB.checked) {
+        rent += rent * Number(doormanCB.value); // +10%
+    }
+    if(viewCB.checked) {
+        rent += rent * Number(viewCB.value); // +25%
+    }
+    if(parkingCB.checked) {
+        rent += Number(parkingCB.value); // +350
+    }
+    if(gymCB.checked) {
+        rent += Number(gymCB.value); // +100
+    }
+    feedbackTag.textContent = `Your estimated rent is $${Math.round(rent)}!`;
+}
