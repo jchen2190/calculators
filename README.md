@@ -1,4 +1,5 @@
 # calculators
+![Screenshot](/screencapture-calculators.png)
 
 ## General Info
 This project is a simple calculator. Includes a typical restaurant bill calculator and apartment rent calculator.
