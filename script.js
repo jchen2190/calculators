@@ -8,7 +8,6 @@ const clearAllButton = document.querySelector('[data-clear-all]');
 const previousOperandTextElement = document.querySelector('[data-previous-operand]');
 const currentOperandTextElement = document.querySelector('[data-current-operand]');
 
-
 class Calculator {
     
     constructor(previousOperandTextElement, currentOperandTextElement) {
@@ -16,26 +15,22 @@ class Calculator {
         this.currentOperandTextElement = currentOperandTextElement;
         this.clear();
     }
-
     // clear displayed values
     clear() {
         this.previousOperand = "";
         this.currentOperand = "";
         this.operation = undefined;
     }
-
     // backspace 'DEL'
     deleteNum() {
         this.currentOperand = this.currentOperand.toString().slice(0, -1); // 0 from start, 1 from end
     }
-
     // click on numbers or . 
     appendNumber(number) {
         // clicking multiple period is still 1 period
         if (number === '.' && this.currentOperand.includes('.')) return; 
         this.currentOperand = this.currentOperand.toString() + number.toString();
     }
-
     // click on ÷ / * / + / -
     chooseOperation(operation) {
         if (this.currentOperand === '') return;
@@ -46,7 +41,6 @@ class Calculator {
         this.previousOperand = this.currentOperand;
         this.currentOperand = '';
     }
-
     compute() {
         let comp;
         const prev = parseFloat(this.previousOperand);
@@ -69,12 +63,10 @@ class Calculator {
             default:
                 return;
         }
-
         this.currentOperand = comp;
         this.operation = undefined;
         this.previousOperand = '';
     }
-
     // display screen
     updateDisplay() {
         this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand);
@@ -85,7 +77,6 @@ class Calculator {
             this.previousOperandTextElement.innerText = '';
         }
     }
-
     getDisplayNumber(num) {
         const stringNumber = num.toString()
         const integerDigits = parseFloat(stringNumber.split('.')[0])
@@ -102,11 +93,9 @@ class Calculator {
           return integerDisplay
         }
       }
-    
 }
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
-
 
 // call functions when buttons are clicked, go to class + constructor
 numberButton.forEach(button => { 
@@ -115,29 +104,24 @@ numberButton.forEach(button => {
         calculator.updateDisplay();
     })
 })
-
 operationButton.forEach(button => {
     button.addEventListener('click', () => {
       calculator.chooseOperation(button.innerText);
       calculator.updateDisplay();
     })
 })
-
 equalButton.addEventListener('click', button => {
     calculator.compute();
     calculator.updateDisplay();
 })
-
 clearAllButton.addEventListener('click', button => {
     calculator.clear();
     calculator.updateDisplay();
 })
-
 deleteButton.addEventListener('click', button => {
     calculator.deleteNum();
     calculator.updateDisplay();
 })
-
 
 document.querySelector('.calculator-grid').addEventListener('keydown', respondToKeyPress)
 
@@ -150,34 +134,27 @@ function respondToKeyPress(event) {
         calculator.appendNumber(event.key)
         calculator.updateDisplay()
     }
-
     if (event.key === '.') {
         event.preventDefault();
         calculator.appendNumber(event.key)
         calculator.updateDisplay()
     }
-
     if (event.key.match(operKey)) {
         event.preventDefault();
         calculator.chooseOperation(event.key);
         calculator.updateDisplay();
     }
-
     if (event.key === '=' || event.key === 'Enter') {
         event.preventDefault();
         calculator.compute();
         calculator.updateDisplay();
     }
-
     if (event.key === "Backspace" || event.key === "Delete") {
         event.preventDefault();
         calculator.deleteNum();
         calculator.updateDisplay();
     }
 }
-
-
-
 
 // --- restaurant bill calculator ---
 
@@ -197,12 +174,9 @@ function calcBill(event) {
     let bevTotal = Number(bev.value);
     let tipPct = Number(tipMenu.value);
     let taxPct = Number(taxMenu.value);
-
     let subTotal = foodTotal + bevTotal;
-
     let taxTotal = subTotal * taxPct / 100;
     let tipTotal = subTotal * tipPct / 100;
-
     let total = subTotal + taxTotal + tipTotal;
 
     tipTotal = tipTotal.toFixed(2);
@@ -244,9 +218,7 @@ function calcBill(event) {
     response.innerHTML = bill;
 }
 
-
-
-// Apartment Rent Estimator
+// --- Apartment Rent Estimator ---
 
 const rentBtn = document.getElementById('rent-btn');
 rentBtn.addEventListener('click', calculateRent);
