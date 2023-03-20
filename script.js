@@ -1,7 +1,5 @@
-// selectorAll for buttons appearing multiple times
 const numberButton = document.querySelectorAll('[data-number]');
 const operationButton = document.querySelectorAll('[data-operation]');
-
 const equalButton = document.querySelector('[data-equal]');
 const deleteButton = document.querySelector('[data-delete]');
 const clearAllButton = document.querySelector('[data-clear-all]');
@@ -9,25 +7,20 @@ const previousOperandTextElement = document.querySelector('[data-previous-operan
 const currentOperandTextElement = document.querySelector('[data-current-operand]');
 
 class Calculator {
-    
     constructor(previousOperandTextElement, currentOperandTextElement) {
         this.previousOperandTextElement = previousOperandTextElement;
         this.currentOperandTextElement = currentOperandTextElement;
         this.clear();
     }
-    // clear displayed values
     clear() {
         this.previousOperand = "";
         this.currentOperand = "";
         this.operation = undefined;
     }
-    // backspace 'DEL'
     deleteNum() {
-        this.currentOperand = this.currentOperand.toString().slice(0, -1); // 0 from start, 1 from end
+        this.currentOperand = this.currentOperand.toString().slice(0, -1);
     }
-    // click on numbers or . 
     appendNumber(number) {
-        // clicking multiple period is still 1 period
         if (number === '.' && this.currentOperand.includes('.')) return; 
         this.currentOperand = this.currentOperand.toString() + number.toString();
     }
@@ -35,7 +28,7 @@ class Calculator {
     chooseOperation(operation) {
         if (this.currentOperand === '') return;
         if (this.previousOperand !== '') {
-        this.compute();
+            this.compute();
         }
         this.operation = operation;
         this.previousOperand = this.currentOperand;
@@ -67,7 +60,6 @@ class Calculator {
         this.operation = undefined;
         this.previousOperand = '';
     }
-    // display screen
     updateDisplay() {
         this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand);
         if (this.operation != null) {
@@ -97,10 +89,9 @@ class Calculator {
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement)
 
-// call functions when buttons are clicked, go to class + constructor
 numberButton.forEach(button => { 
     button.addEventListener('click', () => {
-        calculator.appendNumber(button.innerText); // display values
+        calculator.appendNumber(button.innerText);
         calculator.updateDisplay();
     })
 })
@@ -126,11 +117,11 @@ deleteButton.addEventListener('click', button => {
 document.querySelector('.calculator-grid').addEventListener('keydown', respondToKeyPress)
 
 function respondToKeyPress(event) {
-    let numKey = /[0-9]/g // use regex global
-    let operKey = /[+\-%]/g // use regex global
+    let numKey = /[0-9]/g
+    let operKey = /[+\-%]/g
 
     if (event.key.match(numKey)) {
-        event.preventDefault(); // prevent refresh
+        event.preventDefault();
         calculator.appendNumber(event.key)
         calculator.updateDisplay()
     }
@@ -157,7 +148,6 @@ function respondToKeyPress(event) {
 }
 
 // --- restaurant bill calculator ---
-
 let food = document.getElementById('food');
 let bev = document.getElementById('bev');
 let tipMenu = document.getElementById('tip-menu');
@@ -169,7 +159,6 @@ calcBtn.addEventListener('click', calcBill);
 
 function calcBill(event) {
     event.preventDefault();
-
     let foodTotal = Number(food.value);
     let bevTotal = Number(bev.value);
     let tipPct = Number(tipMenu.value);
@@ -191,8 +180,8 @@ function calcBill(event) {
     if(min < 10) min = '0' + min;
     if(sec < 10) sec = '0' + sec;
     let timeIs =`${hr}:${min}:${sec}`;
-    let date = d.getDate(); // 1-31
-    let month = d.getMonth(); // 0-11
+    let date = d.getDate();
+    let month = d.getMonth();
     let year = d.getFullYear();
     let dateIs = `${month+1}/${date}/${year}`;
 
@@ -214,32 +203,25 @@ function calcBill(event) {
     <br>TOTAL: $${total}
     <br>
     <br>*** THANK YOU ***`;
-
     response.innerHTML = bill;
 }
 
 // --- Apartment Rent Estimator ---
-
 const rentBtn = document.getElementById('rent-btn');
 rentBtn.addEventListener('click', calculateRent);
-
 const feedbackTag = document.getElementById('feedback');
 
 function calculateRent(event) {
     event.preventDefault();
-
-    // get the select menus
     let bdrms = Number(document.getElementById('bdrms').value);
     let baths = Number(document.getElementById('baths').value);
     let rent = bdrms + baths;
 
-    // get the checkboxes
     let doormanCB = document.getElementById('doorman');
     let parkingCB = document.getElementById('parking');
     let viewCB = document.getElementById('view');
     let gymCB = document.getElementById('gym');
 
-    // if checkbox is checked, add the value to the rent
     if(doormanCB.checked) {
         rent += rent * Number(doormanCB.value); // +10%
     }
